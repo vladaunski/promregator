@@ -59,8 +59,8 @@
 		<cloudfoundry.client.version>4.12.0.RELEASE</cloudfoundry.client.version>
 		<logback.contrib.version>0.1.5</logback.contrib.version>
 
-		<sonar.projectKey>promregator</sonar.projectKey>
-		<sonar.organization>promregator</sonar.organization>
+		<sonar.projectKey>vladaunski_promregator</sonar.projectKey>
+		<sonar.organization>pvladaunski</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 
@@ -306,7 +306,41 @@
 
 	<profiles>
 		<profile>
+			<id>coverage</id>
+			<build>
+			<plugins>
+				<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+				<executions>
+					<execution>
+					<id>prepare-agent</id>
+					<goals>
+						<goal>prepare-agent</goal>
+					</goals>
+					</execution>
+					<execution>
+					<id>report</id>
+					<goals>
+						<goal>report</goal>
+					</goals>
+					<configuration>
+						<formats>
+						<format>XML</format>
+						</formats>
+					</configuration>
+					</execution>
+				</executions>
+				</plugin>
+			</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>withTests</id>
+			<activation>
+    			<activeByDefault>true</activeByDefault>
+  			</activation>
 			<build>
 				<plugins>
 					<plugin>
